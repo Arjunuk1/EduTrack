@@ -132,14 +132,14 @@ EduTrack is fully responsive and works seamlessly across:
 
 ## 🗃️ Data Management
 
-The application uses LocalStorage to persist data, simulating a backend database. Data includes:
+The application uses LocalStorage to persist data, simulating a backend database.The Data includes:
 
 - **Students**: Personal info, academic records, contact details
 - **Faculty**: Professional info, courses, departments
 - **Courses**: Course details, credits, descriptions
 - **Attendance**: Date-wise attendance records
 - **Grades**: Assessment results and GPA calculations
-- **Fees**: Payment tracking and financial records
+- **Fees**: Payment tracking and financial records 
 
 ## 🔧 Available Scripts
 
