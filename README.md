@@ -10,7 +10,7 @@ A comprehensive web-based Student Management System built with React, designed t
 - **Student Dashboard**: Personal academic information
 
 ### 👨‍💼 Admin Features
-- **Student Management**: Add, edit, delete, and view student records
+- **Student Management**: Add, modify, delete, and view student records
 - **Faculty Management**: Manage faculty information and assignments
 - **Course Management**: Create and manage course offerings
 - **Fee Management**: Track fee payments and generate reports
