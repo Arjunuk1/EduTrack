@@ -5,7 +5,7 @@ A comprehensive web-based Student Management System built with React, designed t
 ## ✨ Features
 
 ### 🔐 Role-Based Access Control
-- **Admin Dashboard**: Complete system management
+- **Admin Dashboard**: Complete student and faculty system management
 - **Faculty Dashboard**: Course and student management
 - **Student Dashboard**: Personal academic information
 
