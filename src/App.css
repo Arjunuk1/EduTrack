@@ -386,3 +386,75 @@
     border: 1px solid #ddd !important;
   }
 }
+
+/* Form Validation Styles */
+.form-control {
+  padding: 10px 12px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 6px;
+  background: rgba(30, 30, 46, 0.6);
+  color: #e4e4e7;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  background: rgba(30, 30, 46, 0.8);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.form-control.error {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.form-control.error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  color: #d4d4d8;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  display: block;
+}
+
+.form-group textarea {
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* Form Success Styling */
+.form-control.success {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.form-control.success:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.success-message {
+  color: #10b981;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  display: block;
+}

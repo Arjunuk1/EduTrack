@@ -4,6 +4,7 @@ import Modal from '../Common/Modal';
 import AdvancedSearch from '../Common/AdvancedSearch';
 import StudentProfile from '../Common/StudentProfile';
 import { useNotifications } from '../Common/NotificationSystem';
+import { useFormValidation } from '../../hooks/useFormValidation';
 
 const StudentManagement = () => {
   const { students, updateStudents } = useData();
@@ -36,7 +37,8 @@ const StudentManagement = () => {
     guardianAddress: ''
   });
 
-  // original controlled form data handling is used
+  // Validation hook initialization
+  const { errors, touched, validateForm, handleFieldChange, handleFieldBlur, clearErrors } = useFormValidation(formData);
 
   const searchFields = ['name', 'studentId', 'email', 'phone', 'class', 'section'];
   const searchFilters = {
@@ -51,6 +53,7 @@ const StudentManagement = () => {
 
   const handleAddStudent = () => {
     setEditingStudent(null);
+    clearErrors();
     setFormData({
       name: '',
       email: '',
@@ -77,6 +80,7 @@ const StudentManagement = () => {
 
   const handleEditStudent = (student) => {
     setEditingStudent(student);
+    clearErrors();
     setFormData(student);
     setShowModal(true);
   };
@@ -110,23 +114,35 @@ const StudentManagement = () => {
     }
   };
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Validate form before submitting
+    if (!validateForm(formData)) {
+      addNotification({
+        type: 'error',
+        title: 'Validation Error',
+        message: 'Please fix the errors in the form before submitting.'
+      });
+      return;
+    }
+
     // data comes from react-hook-form
     if (editingStudent) {
       // Update existing student
       const updatedStudents = students.map(student => 
-        student.id === editingStudent.id ? { ...data, id: editingStudent.id } : student
+        student.id === editingStudent.id ? { ...formData, id: editingStudent.id } : student
       );
       updateStudents(updatedStudents);
       addNotification({
         type: 'success',
         title: 'Student Updated',
-        message: `${data.name}'s information has been updated.`
+        message: `${formData.name}'s information has been updated.`
       });
     } else {
       // Add new student
       const newStudent = {
-        ...data,
+        ...formData,
         id: Date.now(),
         studentId: `STU${String(students.length + 1).padStart(3, '0')}`
       };
@@ -134,7 +150,7 @@ const StudentManagement = () => {
       addNotification({
         type: 'success',
         title: 'Student Added',
-        message: `${data.name} has been successfully enrolled.`
+        message: `${formData.name} has been successfully enrolled.`
       });
     }
     
@@ -144,6 +160,8 @@ const StudentManagement = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // Validate field as user types
+    handleFieldChange(name, value);
   };
 
   const getStudentStats = () => {
@@ -362,9 +380,11 @@ const StudentManagement = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="form-control"
+                  onBlur={() => handleFieldBlur('name')}
+                  className={`form-control ${errors.name && touched.name ? 'error' : ''}`}
                   required
                 />
+                {errors.name && touched.name && <span className="error-message">{errors.name}</span>}
               </div>
               
               <div className="form-group">
@@ -374,9 +394,11 @@ const StudentManagement = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="form-control"
+                  onBlur={() => handleFieldBlur('email')}
+                  className={`form-control ${errors.email && touched.email ? 'error' : ''}`}
                   required
                 />
+                {errors.email && touched.email && <span className="error-message">{errors.email}</span>}
               </div>
               
               <div className="form-group">
@@ -386,8 +408,10 @@ const StudentManagement = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="form-control"
+                  onBlur={() => handleFieldBlur('phone')}
+                  className={`form-control ${errors.phone && touched.phone ? 'error' : ''}`}
                 />
+                {errors.phone && touched.phone && <span className="error-message">{errors.phone}</span>}
               </div>
               
               <div className="form-group">
@@ -397,7 +421,8 @@ const StudentManagement = () => {
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
-                  className="form-control"
+                  onBlur={() => handleFieldBlur('dateOfBirth')}
+                  className={`form-control ${errors.dateOfBirth && touched.dateOfBirth ? 'error' : ''}`}
                 />
               </div>
               
