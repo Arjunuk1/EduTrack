@@ -615,3 +615,25 @@
     padding: 12px 24px;
   }
 }
+
+/* Toast Container and Notifications */
+.toast-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Notification Bell Styling */
+.notification-bell {
+  position: relative;
+}
+
+.notification-bell .bell-button {
+  position: relative;
+  padding: 8px;
+}
+
+/* Ensure toasts are above other elements */
+.toast {
+  z-index: 9999 !important;
+}

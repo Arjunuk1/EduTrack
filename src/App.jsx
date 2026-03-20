@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { NotificationProvider } from './components/Common/NotificationSystem';
+import { ToastProvider } from './components/Common/ToastNotification';
 import './App.css';
 
 function ProtectedRoute({ children, allowedRoles }) {
@@ -65,13 +66,15 @@ function App() {
       <AuthProvider>
         <DataProvider>
           <NotificationProvider>
-            <Router>
-              <div className="App">
-                <Suspense fallback={<div style={{padding:20}}>Loading...</div>}>
-                  <AppRoutes />
-                </Suspense>
-              </div>
-            </Router>
+            <ToastProvider>
+              <Router>
+                <div className="App">
+                  <Suspense fallback={<div style={{padding:20}}>Loading...</div>}>
+                    <AppRoutes />
+                  </Suspense>
+                </div>
+              </Router>
+            </ToastProvider>
           </NotificationProvider>
         </DataProvider>
       </AuthProvider>
