@@ -164,11 +164,15 @@ export const NotificationBell = () => {
           position: relative;
           padding: 8px;
           border-radius: 50%;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .bell-button:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(139, 92, 246, 0.15);
+          transform: scale(1.1);
         }
 
         .bell-icon {
@@ -178,56 +182,67 @@ export const NotificationBell = () => {
 
         .notification-badge {
           position: absolute;
-          top: 0;
-          right: 0;
-          background: #ff4757;
+          top: -4px;
+          right: -4px;
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
           color: white;
           border-radius: 50%;
-          width: 18px;
-          height: 18px;
+          width: 22px;
+          height: 22px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 10px;
-          font-weight: bold;
+          font-size: 11px;
+          font-weight: 700;
+          box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+          border: 2px solid rgba(30, 30, 46, 0.8);
         }
 
         .notification-dropdown {
           position: absolute;
           top: 100%;
           right: 0;
-          width: 350px;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          width: 380px;
+          background: rgba(30, 30, 46, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 12px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
           z-index: 1000;
-          border: 1px solid #e0e0e0;
-          max-height: 400px;
+          border: 1px solid rgba(139, 92, 246, 0.2);
+          max-height: 450px;
           overflow: hidden;
+          margin-top: 12px;
         }
 
         .notification-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 15px 20px;
-          border-bottom: 1px solid #eee;
-          background: #f8f9fa;
+          padding: 16px 20px;
+          border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+          background: rgba(139, 92, 246, 0.05);
         }
 
         .notification-header h4 {
           margin: 0;
           font-size: 16px;
-          color: #333;
+          color: #e4e4e7;
+          font-weight: 700;
         }
 
         .mark-all-read {
           background: none;
           border: none;
-          color: #667eea;
+          color: #8b5cf6;
           cursor: pointer;
           font-size: 12px;
           text-decoration: underline;
+          transition: color 0.2s ease;
+          font-weight: 500;
+        }
+
+        .mark-all-read:hover {
+          color: #a78bfa;
         }
 
         .notification-list {
@@ -238,27 +253,28 @@ export const NotificationBell = () => {
         .notification-item {
           display: flex;
           padding: 15px 20px;
-          border-bottom: 1px solid #f0f0f0;
+          border-bottom: 1px solid rgba(139, 92, 246, 0.05);
           cursor: pointer;
-          transition: background 0.2s ease;
+          transition: all 0.2s ease;
         }
 
         .notification-item:hover {
-          background: #f8f9fa;
+          background: rgba(139, 92, 246, 0.1);
         }
 
         .notification-item.unread {
-          background: #f0f8ff;
-          border-left: 3px solid #667eea;
+          background: rgba(139, 92, 246, 0.15);
+          border-left: 3px solid #8b5cf6;
         }
 
         .notification-item.high {
-          border-left-color: #ff4757;
+          border-left-color: #ef4444;
         }
 
         .notification-type {
           margin-right: 12px;
-          font-size: 16px;
+          font-size: 18px;
+          flex-shrink: 0;
         }
 
         .notification-content {
@@ -267,37 +283,42 @@ export const NotificationBell = () => {
 
         .notification-title {
           font-weight: 600;
-          color: #333;
+          color: #e4e4e7;
           margin-bottom: 4px;
           font-size: 14px;
         }
 
         .notification-message {
-          color: #666;
-          font-size: 12px;
-          margin-bottom: 4px;
+          color: #a1a1aa;
+          font-size: 13px;
+          margin-bottom: 6px;
           line-height: 1.4;
         }
 
         .notification-time {
-          color: #999;
+          color: #71717a;
           font-size: 11px;
         }
 
         .notification-footer {
           padding: 15px 20px;
-          border-top: 1px solid #eee;
+          border-top: 1px solid rgba(139, 92, 246, 0.1);
           text-align: center;
-          background: #f8f9fa;
+          background: rgba(139, 92, 246, 0.05);
         }
 
         .view-all {
           background: none;
           border: none;
-          color: #667eea;
+          color: #8b5cf6;
           cursor: pointer;
           font-size: 13px;
-          font-weight: 500;
+          font-weight: 600;
+          transition: color 0.2s ease;
+        }
+
+        .view-all:hover {
+          color: #a78bfa;
         }
 
         @media (max-width: 768px) {
