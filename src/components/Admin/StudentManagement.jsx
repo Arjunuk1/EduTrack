@@ -3,6 +3,7 @@ import { useData } from '../../context/DataContext';
 import Modal from '../Common/Modal';
 import AdvancedSearch from '../Common/AdvancedSearch';
 import StudentProfile from '../Common/StudentProfile';
+import EmptyState from '../Common/EmptyState';
 import { useNotifications } from '../Common/NotificationSystem';
 import { useFormValidation } from '../../hooks/useFormValidation';
 import { useSorting } from '../../hooks/useSorting';
@@ -393,11 +394,17 @@ const StudentManagement = () => {
       )}
 
       {filteredStudents.length === 0 && (
-        <div className="empty-state">
-          <div className="empty-icon">🔍</div>
-          <h3>No students found</h3>
-          <p>Try adjusting your search criteria or add a new student.</p>
-        </div>
+        <EmptyState
+          icon="🎓"
+          title="No students found"
+          message={students.length === 0 ? "Start by adding your first student to the system." : "Try adjusting your search criteria or filters."}
+          type={students.length === 0 ? 'add' : 'search'}
+          actionButton={students.length === 0 ? (
+            <button onClick={handleAddStudent} className="btn btn-primary">
+              ➕ Add First Student
+            </button>
+          ) : null}
+        />
       )}
 
       {showModal && (

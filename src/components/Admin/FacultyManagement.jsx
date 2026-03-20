@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import Modal from '../Common/Modal';
+import EmptyState from '../Common/EmptyState';
 import { useSorting } from '../../hooks/useSorting';
 
 const FacultyManagement = () => {
@@ -198,6 +199,20 @@ const FacultyManagement = () => {
           </tbody>
         </table>
       </div>
+
+      {sortedFaculty.length === 0 && (
+        <EmptyState
+          icon="👨‍🏫"
+          title="No faculty members found"
+          message={faculty.length === 0 ? "Start by adding your first faculty member to the system." : "Try adjusting your search criteria or filters."}
+          type={faculty.length === 0 ? 'add' : 'search'}
+          actionButton={faculty.length === 0 ? (
+            <button onClick={handleAddFaculty} className="btn btn-primary">
+              ➕ Add First Faculty Member
+            </button>
+          ) : null}
+        />
+      )}
 
       {showModal && (
         <Modal

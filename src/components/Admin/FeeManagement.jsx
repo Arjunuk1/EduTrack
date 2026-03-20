@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import Modal from '../Common/Modal';
+import EmptyState from '../Common/EmptyState';
 
 const FeeManagement = () => {
   const { fees, students, updateFees } = useData();
@@ -239,9 +240,17 @@ const FeeManagement = () => {
       </div>
 
       {filteredFees.length === 0 && (
-        <div className="empty-state">
-          <p>No fee records found matching your criteria.</p>
-        </div>
+        <EmptyState
+          icon="💰"
+          title="No fee records found"
+          message={fees.length === 0 ? "Start by adding fee records for students." : "Try adjusting your search criteria or filters."}
+          type={fees.length === 0 ? 'add' : 'search'}
+          actionButton={fees.length === 0 ? (
+            <button onClick={handleAddFee} className="btn btn-primary">
+              ➕ Add First Fee Record
+            </button>
+          ) : null}
+        />
       )}
 
       {showModal && (
