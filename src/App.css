@@ -458,3 +458,40 @@
   margin-top: 4px;
   display: block;
 }
+
+/* Sortable Table Headers */
+.table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.table th.sortable:hover {
+  background: rgba(139, 92, 246, 0.25);
+  color: #8b5cf6;
+}
+
+.table th.sortable.active {
+  background: rgba(139, 92, 246, 0.3);
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.table th.sortable::after {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-left: 6px;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.table th.sortable:hover::after {
+  opacity: 1;
+}
+
+.table th.sortable.active::after {
+  opacity: 1;
+}

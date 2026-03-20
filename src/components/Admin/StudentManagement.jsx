@@ -5,6 +5,7 @@ import AdvancedSearch from '../Common/AdvancedSearch';
 import StudentProfile from '../Common/StudentProfile';
 import { useNotifications } from '../Common/NotificationSystem';
 import { useFormValidation } from '../../hooks/useFormValidation';
+import { useSorting } from '../../hooks/useSorting';
 
 const StudentManagement = () => {
   const { students, updateStudents } = useData();
@@ -39,6 +40,9 @@ const StudentManagement = () => {
 
   // Validation hook initialization
   const { errors, touched, validateForm, handleFieldChange, handleFieldBlur, clearErrors } = useFormValidation(formData);
+
+  // Sorting hook initialization - will sort the filtered students
+  const { sortedData: sortedStudents, handleSort, getSortIndicator, isSorted } = useSorting(filteredStudents, 'name', 'asc');
 
   const searchFields = ['name', 'studentId', 'email', 'phone', 'class', 'section'];
   const searchFilters = {
@@ -307,17 +311,47 @@ const StudentManagement = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Class</th>
-                <th>Section</th>
-                <th>Status</th>
+                <th 
+                  onClick={() => handleSort('studentId')}
+                  className={`sortable ${isSorted('studentId') ? 'active' : ''}`}
+                >
+                  Student ID{getSortIndicator('studentId')}
+                </th>
+                <th 
+                  onClick={() => handleSort('name')}
+                  className={`sortable ${isSorted('name') ? 'active' : ''}`}
+                >
+                  Name{getSortIndicator('name')}
+                </th>
+                <th 
+                  onClick={() => handleSort('email')}
+                  className={`sortable ${isSorted('email') ? 'active' : ''}`}
+                >
+                  Email{getSortIndicator('email')}
+                </th>
+                <th 
+                  onClick={() => handleSort('class')}
+                  className={`sortable ${isSorted('class') ? 'active' : ''}`}
+                >
+                  Class{getSortIndicator('class')}
+                </th>
+                <th 
+                  onClick={() => handleSort('section')}
+                  className={`sortable ${isSorted('section') ? 'active' : ''}`}
+                >
+                  Section{getSortIndicator('section')}
+                </th>
+                <th 
+                  onClick={() => handleSort('status')}
+                  className={`sortable ${isSorted('status') ? 'active' : ''}`}
+                >
+                  Status{getSortIndicator('status')}
+                </th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.map(student => (
+              {sortedStudents.map(student => (
                 <tr key={student.id}>
                   <td>{student.studentId}</td>
                   <td>{student.name}</td>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import Modal from '../Common/Modal';
+import { useSorting } from '../../hooks/useSorting';
 
 const FacultyManagement = () => {
   const { faculty, updateFaculty } = useData();
@@ -24,6 +25,9 @@ const FacultyManagement = () => {
     member.facultyId.toLowerCase().includes(searchTerm.toLowerCase()) ||
     member.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Sorting hook for faculty list
+  const { sortedData: sortedFaculty, handleSort, getSortIndicator, isSorted } = useSorting(filteredFaculty, 'name', 'asc');
 
   const handleAddFaculty = () => {
     setEditingFaculty(null);
@@ -111,18 +115,48 @@ const FacultyManagement = () => {
         <table className="table">
           <thead>
             <tr>
-              <th>Faculty ID</th>
-              <th>Name</th>
-              <th>Department</th>
-              <th>Qualification</th>
-              <th>Experience</th>
+              <th 
+                onClick={() => handleSort('facultyId')}
+                className={`sortable ${isSorted('facultyId') ? 'active' : ''}`}
+              >
+                Faculty ID{getSortIndicator('facultyId')}
+              </th>
+              <th 
+                onClick={() => handleSort('name')}
+                className={`sortable ${isSorted('name') ? 'active' : ''}`}
+              >
+                Name{getSortIndicator('name')}
+              </th>
+              <th 
+                onClick={() => handleSort('department')}
+                className={`sortable ${isSorted('department') ? 'active' : ''}`}
+              >
+                Department{getSortIndicator('department')}
+              </th>
+              <th 
+                onClick={() => handleSort('qualification')}
+                className={`sortable ${isSorted('qualification') ? 'active' : ''}`}
+              >
+                Qualification{getSortIndicator('qualification')}
+              </th>
+              <th 
+                onClick={() => handleSort('experience')}
+                className={`sortable ${isSorted('experience') ? 'active' : ''}`}
+              >
+                Experience{getSortIndicator('experience')}
+              </th>
               <th>Subjects</th>
-              <th>Status</th>
+              <th 
+                onClick={() => handleSort('status')}
+                className={`sortable ${isSorted('status') ? 'active' : ''}`}
+              >
+                Status{getSortIndicator('status')}
+              </th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredFaculty.map(member => (
+            {sortedFaculty.map(member => (
               <tr key={member.id}>
                 <td>{member.facultyId}</td>
                 <td>{member.name}</td>
