@@ -37,7 +37,19 @@ A comprehensive web-based Student Management System built with React, designed t
 - **Build Tool**: Vite
 - **Package Manager**: npm
 
-## 📁 Project Structure
+## �️ How to Run Locally
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+2. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+3. Open your browser and navigate to the local URL (usually `http://localhost:5173`).
+
+## �📁 Project Structure
 
 ```
 src/
